@@ -1,3 +1,12 @@
+# Minimum Viable Product
+Persistent Markdown Notitie App
+
+- Show all notes list with new notes button
+    - Click on new notes button > Show Title field, Content field, Submit button
+        - Submit > sends data to database through API > Returns to overview
+    - Click on note
+        Show Title and Content on new page in plain markdown
+
 # General Structure
 Notebook   (sharable?)
 - contains Notes
@@ -7,15 +16,6 @@ Notebook   (sharable?)
 (DND) Templates
 - Notebook = DND related
     - DnD related adds templates like "location, npc, player" which populates the content field
-
-# Minimum Viable Product
-Persistent Markdown Notitie App
-
-- Show all notes list with new notes button
-    - Click on new notes button > Show Title field, Content field, Submit button
-        - Submit > sends data to database through API > Returns to overview
-    - Click on note
-        Show Title and Content on new page in plain markdown
 
 # Database
 
