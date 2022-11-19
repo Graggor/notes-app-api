@@ -4,7 +4,6 @@ Notebook   (sharable?)
     - Markdown op de achtergrond, uiteindelijke mooiere frontend
     - Inline Notes shorthand
 
-
 (DND) Templates
 - Notebook = DND related
     - DnD related adds templates like "location, npc, player" which populates the content field
