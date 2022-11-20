@@ -1,0 +1,26 @@
+{
+  "name": "notes-app-api",
+  "version": "0.0.1",
+  "description": "The Backend for the yet to be named Notes App.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Graggor/notes-app-api.git"
+  },
+  "keywords": [
+    "notes"
+  ],
+  "author": "Edwin Dierssen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Graggor/notes-app-api/issues"
+  },
+  "homepage": "https://github.com/Graggor/notes-app-api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
