@@ -1,14 +1,18 @@
-const express = require("express");
+const express = require('express')
+const router = express.Router()
 
-const router = express.Router();
+const notebookController = require('../controllers/notebookController')
 
-// GET /notes/id
-// Gets note by note ID
-router.get("/:id", (req, res) => {
-    // kale sql query
-  var returntext = "notebook " + req.params.id;
-  res.status(200).send(returntext);
-  res.json;
-});
+// Adding all the endpoints needed and forwarding the handling of it to the controller
+// Gets all notebooks from the user specified in request
+router.get('/', notebookController.getNotebooks)
+// Gets all notes that are in notebook with ID notebookId
+router.get('/:id/notes', notebookController.getNotesInNotebook)
+// Create new Notebook
+router.post('/', notebookController.postNotebook)
+// Updates Notebook, expects ID in request
+router.put('/', notebookController.updateNotebook)
+// Deletes Notebook. WARNING: Deletes ALL notes in the notebook aswell!
+router.delete('/:id', notebookController.deleteNotebook)
 
-module.exports = router;
+module.exports = router

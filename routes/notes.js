@@ -1,15 +1,17 @@
 const express = require('express');
-
+const Note = require('../models/note')
 const router = express.Router()
 
-// 
+const noteController = require('../controllers/noteController')
 
-// GET /notes/id
-// Gets note by note ID
-router.get('/:id', (req, res) => {
-    var returntext = 'note id ' + req.params.id
-    res.status(200).send(returntext)
-    res.json
-})
+// Adding all the endpoints needed and forwarding the handling of it to the notesController
+// Get single note by ID
+router.get('/:id', noteController.getNote)
+// Create new note, expects notebook ID in request
+router.post('/', noteController.postNote)
+// Delete note by ID
+router.delete('/:id', noteController.deleteNote)
+// Updates note by ID
+router.put('/', noteController.updateNote)
 
-module.exports = router;
+module.exports = router
