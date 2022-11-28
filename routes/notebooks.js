@@ -11,7 +11,7 @@ router.get('/:id/notes', notebookController.getNotesInNotebook)
 // Create new Notebook
 router.post('/', notebookController.postNotebook)
 // Updates Notebook, expects ID in request
-router.put('/', notebookController.updateNotebook)
+router.patch('/', notebookController.updateNotebook)
 // Deletes Notebook. WARNING: Deletes ALL notes in the notebook aswell!
 router.delete('/:id', notebookController.deleteNotebook)
 

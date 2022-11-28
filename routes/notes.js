@@ -12,6 +12,6 @@ router.post('/', noteController.postNote)
 // Delete note by ID
 router.delete('/:id', noteController.deleteNote)
 // Updates note by ID
-router.put('/', noteController.updateNote)
+router.patch('/', noteController.updateNote)
 
 module.exports = router
