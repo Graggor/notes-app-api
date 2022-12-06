@@ -1,8 +1,6 @@
 const express = require('express');
-const Note = require('../models/note')
-const router = express.Router()
-
 const noteController = require('../controllers/noteController')
+const router = express.Router()
 
 // Adding all the endpoints needed and forwarding the handling of it to the notesController
 // Get single note by ID

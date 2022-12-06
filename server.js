@@ -4,8 +4,9 @@ const helmet = require('helmet')
 const mongoose = require('mongoose')
 const app = express()
 
+require('dotenv').config()
+
 app.use(helmet())
-app.use(express.json())
 
 mongoose.connect('mongodb://127.0.0.1:27017/noteapp')
     .then(() => {
@@ -17,11 +18,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/noteapp')
 
 const notesRoute = require('./routes/notes')
 const notebooksRoute = require('./routes/notebooks')
+const usersRoute = require('./routes/users')
+
+// Allows for using application/json in requests
+app.use(express.json())
+// Allows for using req.body.{name} in router
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/notes', notesRoute)
 app.use('/notebooks', notebooksRoute)
-// Allows for using req.body.{name} in router
-app.use(express.urlencoded({ extended: false }))
+app.use('/auth', usersRoute)
 
 app.listen(process.env.PORT || DEFAULT_PORT, function () {
     console.log('Listening on port %d', (process.env.PORT || DEFAULT_PORT))

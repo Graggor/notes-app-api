@@ -29,16 +29,16 @@ noteController.postNote = async function(req, res){
     res.status(200)
     res.send(note)
 
-    var note = req.body
-    note.owner = req.user._id
-    Note.create(note)
-        .exec()
-        .then(function(note){
-            res.json(note)
-        })
-        .catch(function(err){
-            res.send(err)
-        })
+    // var note = req.body
+    // note.owner = req.user._id
+    // Note.create(note)
+    //     .exec()
+    //     .then(function(note){
+    //         res.json(note)
+    //     })
+    //     .catch(function(err){
+    //         res.send(err)
+    //     })
 }
 
 // Deletes note

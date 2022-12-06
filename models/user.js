@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
+var uniqueValidator = require('mongoose-unique-validator')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, "Username not provided"],
+        unique: true,
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Password not provided"],
     },
     createdAt: {
         type: Date,
@@ -40,6 +42,8 @@ UserSchema.methods = {
         return obj
     }
 }
+
+UserSchema.plugin(uniqueValidator, {message: '{PATH} already taken.'})
 
 // Export model
 module.exports = mongoose.model('User', UserSchema)
