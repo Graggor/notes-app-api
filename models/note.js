@@ -30,5 +30,10 @@ const NoteSchema = new Schema({
     },
 })
 
+// Want to add:
+// title readability names like this-is-my-title
+// Automatically add a number to the end if the title exists, like this-is-my-title1
+// https://www.npmjs.com/package/mongoose-slug-updater for above, see uniqueGroupSlug
+
 // Export model
 module.exports = mongoose.model('Note', NoteSchema)

@@ -18,27 +18,34 @@ noteController.getNote = async function(req, res){
 // Expects a user with _id param ????
 // TODO: Figure out what a request should look like
 noteController.postNote = async function(req, res){
+    console.log(req.body)
     // notebook, owner, title, content
     const note = new Note({
-        notebook: req.body.notebook,
-        owner: req.body.owner,
+        notebook: '638cb88d7b844ea3836e7c90',
+        owner: '638cb88d7b844ea3836e7c8c',
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
     })
-    await note.save()
-    res.status(200)
-    res.send(note)
+    // await note.save()
+    // res.status(200)
 
-    // var note = req.body
-    // note.owner = req.user._id
-    // Note.create(note)
-    //     .exec()
-    //     .then(function(note){
-    //         res.json(note)
-    //     })
-    //     .catch(function(err){
-    //         res.send(err)
-    //     })
+    note.save((err, note) => {
+        if (err) {
+            // There was an error. Check if it's a duplicate.
+            if (err.name === 'ValidationError') {
+                res.status(409)
+                res.send(err.message)
+            } else {
+                // Not a duplicate, not sure what happened. Default error code.
+                res.status(500)
+                res.send()
+            }
+        } else {
+            // Note created! Send an OK with the created note.
+            res.status(200)
+            res.send(note)
+        }
+    })
 }
 
 // Deletes note

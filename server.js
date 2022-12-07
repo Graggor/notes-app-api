@@ -1,4 +1,3 @@
-const DEFAULT_PORT = 3000
 const express = require('express')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
@@ -29,6 +28,6 @@ app.use('/notes', notesRoute)
 app.use('/notebooks', notebooksRoute)
 app.use('/auth', usersRoute)
 
-app.listen(process.env.PORT || DEFAULT_PORT, function () {
-    console.log('Listening on port %d', (process.env.PORT || DEFAULT_PORT))
+app.listen(process.env.PORT, function () {
+    console.log('Listening on port %d', (process.env.PORT))
 })
