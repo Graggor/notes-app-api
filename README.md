@@ -1,3 +1,4 @@
+![Logo](./images/logo_small.png)
 # Minimum Viable Product
 Persistent Markdown Notitie App
 
