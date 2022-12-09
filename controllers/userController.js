@@ -3,6 +3,46 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 var userController = {}
 
+/**
+ * @swagger
+ * /auth/signup:
+ *   post:
+ *     description: Registers a new user.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: username
+ *         description: The username for the new user.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *         example: john_doe
+ *       - name: password
+ *         description: The password for the new user.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *         example: p@ssword
+ *     responses:
+ *       201:
+ *         description: User created successfully.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               example: User john_doe registered successfully.
+ *       409:
+ *         description: A user with the given username already exists.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               example: User already exists.
+ *       500:
+ *         description: An error occurred.
+ */
 
 userController.signup = (req, res) => {
     const user = new User({
@@ -15,19 +55,81 @@ userController.signup = (req, res) => {
             // There was an error. Check if it's a duplicate.
             if (err.name === 'ValidationError'){
                 res.status(409)
-                res.send(err.message)
+                res.json({error: err.message})
             } else{
                 // Not a duplicate, not sure what happened. Default error code.
                 res.status(500)
-                res.send()
+                res.json({ error: err.message })
             }
         } else{
             // User created! Send an OK with the registered username.
             res.status(201)
-            res.send({message: `User ${user.username} registered successfully.`})
+            res.json({message: `User ${user.username} registered successfully.`})
         }
     })
 }
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     description: Logs in a user.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: username
+ *         description: The username of the user to log in.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: The password of the user to log in.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: User logged in successfully.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             user:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   example: 5e983e5f5c5b2d179c5e9f79
+ *                 username:
+ *                   type: string
+ *                   example: john_doe
+ *             message:
+ *               type: string
+ *               example: Login successfull
+ *             accessToken:
+ *               type: string
+ *               example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZiw7ruYzOTBmYTYifjghtruykMjhlMDZiYjQzNyIsInVzZXJuYW1lIjoiR3JhZ2dvciIsImlhdCI6MTY3MDU0Nzk1OCwiZXhwIjoxasdfNjM0MzU4fQ.2bgxxHkiXkVzMTPkw4AKtscQFEYQ8keGUq8K82TnTsd
+ *       401:
+ *         description: Invalid password.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             accessToken:
+ *               type: string
+ *               example: null
+ *             message:
+ *               type: string
+ *               example: Invalid password!
+ *       404:
+ *         description: User not found.
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               example: User not found.
+ *       500:
+ *         description: An error occurred.
+ */
 
 userController.signin = (req, res) => {
     User.findOne({
