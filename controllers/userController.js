@@ -5,7 +5,7 @@ var userController = {}
 
 /**
  * @swagger
- * /auth/signup:
+ * /users/register:
  *   post:
  *     description: Registers a new user.
  *     produces:
@@ -71,7 +71,7 @@ userController.signup = (req, res) => {
 
 /**
  * @swagger
- * /auth/login:
+ * /users/login:
  *   post:
  *     description: Logs in a user.
  *     produces:

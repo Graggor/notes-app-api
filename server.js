@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }))
 swagger(app)
 
 // Call the auth routes before using the verifyJWT middleware.
-app.use('/auth', usersRoute)
+app.use('/users', usersRoute)
 
 // Middleware function to verify the JWT
 function verifyJWT(req, res, next) {
@@ -65,6 +65,12 @@ app.use(verifyJWT)
 
 app.use('/notes', notesRoute)
 app.use('/notebooks', notebooksRoute)
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    res.status(404)
+    res.json({error: "Resource not found"});
+});
 
 app.listen(process.env.PORT, function () {
     console.log('Listening on port %d', process.env.PORT)
